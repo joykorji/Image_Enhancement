@@ -297,6 +297,33 @@ def sobel_edge_vertical(image):
     new_image = stretching(new_image)
     return new_image
 
+#vertical edge detection 
+def edge_detection_vertical(image):
+    size_x, size_y = image.shape
+    new_image = image.copy()
+    for i in range(1, size_x-1):
+        for j in range(1, size_y-1):
+            total = 0
+            for l in range(-1,2):
+                total += l*image[i][j+l]
+            new_image[i][j] = total
+    new_image = stretching(new_image)
+    return new_image
+
+#horizontal edge detection 
+def edge_detection_horizontal(image):
+    size_x, size_y = image.shape
+    new_image = image.copy()
+    for i in range(1, size_x-1):
+        for j in range(1, size_y-1):
+            total = 0
+            for l in range(-1,2):
+                total += l*image[i+l][j]
+            new_image[i][j] = total
+    new_image = stretching(new_image)
+    return new_image
+
+
 def main():
     pgm, name = get_image()
     enhance(np.reshape(pgm[0],pgm[1]), name)
